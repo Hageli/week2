@@ -125,6 +125,7 @@ var inputAdmin = document.getElementById("input-admin");
 var submitData = document.getElementById("submit-data");
 var tableBody = document.getElementById("table-content");
 var emptyTable = document.getElementById("empty-table");
+var table = document.getElementById("table");
 submitData.addEventListener("click", function () {
   return changeTable();
 });
@@ -133,6 +134,10 @@ emptyTable.addEventListener("click", function () {
 });
 
 function changeTable() {
+  if (inputUsername.value.length == 0 || inputEmail.value.length == 0 || inputAddress.value.length == 0) {
+    return;
+  }
+
   var newRow = document.createElement("tr");
   var newUsername = document.createElement("td");
   newUsername.innerText = inputUsername.value;
@@ -152,11 +157,22 @@ function changeTable() {
   newRow.appendChild(newEmail);
   newRow.appendChild(newAddress);
   newRow.appendChild(newAdmin);
+
+  if (checkTable) {}
+
   tableBody.appendChild(newRow);
 }
 
 function cleanTable() {
   tableBody.innerHTML = "";
+}
+
+function checkTable() {
+  for (var i = 0; i < table.tBodies[0].rows.length - 1; i++) {
+    if (tableBody.getElementsByTagName("tr")[i].firstChild.innerText == inputUsername.value) {
+      return true;
+    }
+  }
 }
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -186,7 +202,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41503" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39775" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -5,11 +5,19 @@ const inputAdmin = document.getElementById("input-admin");
 const submitData = document.getElementById("submit-data");
 let tableBody = document.getElementById("table-content");
 const emptyTable = document.getElementById("empty-table");
+const table = document.getElementById("table");
 
 submitData.addEventListener("click", () => changeTable());
 emptyTable.addEventListener("click", () => cleanTable());
 
 function changeTable() {
+  if (
+    inputUsername.value.length == 0 ||
+    inputEmail.value.length == 0 ||
+    inputAddress.value.length == 0
+  ) {
+    return;
+  }
   let newRow = document.createElement("tr");
   let newUsername = document.createElement("td");
   newUsername.innerText = inputUsername.value;
@@ -27,9 +35,22 @@ function changeTable() {
   newRow.appendChild(newEmail);
   newRow.appendChild(newAddress);
   newRow.appendChild(newAdmin);
+  if (checkTable) {
+  }
   tableBody.appendChild(newRow);
 }
 
 function cleanTable() {
   tableBody.innerHTML = "";
+}
+
+function checkTable() {
+  for (let i = 0; i < table.tBodies[0].rows.length - 1; i++) {
+    if (
+      tableBody.getElementsByTagName("tr")[i].firstChild.innerText ==
+      inputUsername.value
+    ) {
+      return true;
+    }
+  }
 }
