@@ -12,40 +12,42 @@ submitData.addEventListener("click", () => changeTable());
 emptyTable.addEventListener("click", () => cleanTable());
 
 function changeTable() {
-  if (
-    inputUsername.value.length == 0 ||
-    inputEmail.value.length == 0 ||
-    inputAddress.value.length == 0 ||
-    fileUpload.files.length == 0
-  ) {
-    return;
-  }
   let newRow = document.createElement("tr");
+
   let newUsername = document.createElement("td");
   newUsername.innerText = inputUsername.value;
+  newRow.appendChild(newUsername);
+
   let newEmail = document.createElement("td");
   newEmail.innerText = inputEmail.value;
+  newRow.appendChild(newEmail);
+
   let newAddress = document.createElement("td");
   newAddress.innerText = inputAddress.value;
+  newRow.appendChild(newAddress);
+
   let newAdmin = document.createElement("td");
   if (inputAdmin.checked) {
     newAdmin.innerText = "X";
   } else {
     newAdmin.innerText = "-";
   }
-
-  let imageSrc = URL.createObjectURL(fileUpload.files[0]);
-  let newImage = document.createElement("img");
-  newImage.src = imageSrc;
-
-  newImage.setAttribute("width", 64);
-  newImage.setAttribute("height", 64);
-
-  newRow.appendChild(newUsername);
-  newRow.appendChild(newEmail);
-  newRow.appendChild(newAddress);
   newRow.appendChild(newAdmin);
-  newRow.appendChild(newImage);
+
+  let imageTD = document.createElement("td");
+  if (!(fileUpload.files.length == 0)) {
+    let imageSrc = URL.createObjectURL(fileUpload.files[0]);
+    let newImage = document.createElement("img");
+    newImage.src = imageSrc;
+    newImage.setAttribute("width", 64);
+    newImage.setAttribute("height", 64);
+    imageTD.appendChild(newImage);
+    newRow.appendChild(imageTD);
+  } else {
+    imageTD.innerHTML = "";
+    newRow.appendChild(imageTD);
+  }
+
   if (!checkTable(newRow)) {
     tableBody.appendChild(newRow);
   }
