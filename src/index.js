@@ -6,6 +6,7 @@ const submitData = document.getElementById("submit-data");
 let tableBody = document.getElementById("table-content");
 const emptyTable = document.getElementById("empty-table");
 const table = document.getElementById("table");
+const fileUpload = document.getElementById("input-image");
 
 submitData.addEventListener("click", () => changeTable());
 emptyTable.addEventListener("click", () => cleanTable());
@@ -14,7 +15,8 @@ function changeTable() {
   if (
     inputUsername.value.length == 0 ||
     inputEmail.value.length == 0 ||
-    inputAddress.value.length == 0
+    inputAddress.value.length == 0 ||
+    fileUpload.files.length == 0
   ) {
     return;
   }
@@ -31,10 +33,19 @@ function changeTable() {
   } else {
     newAdmin.innerText = "-";
   }
+
+  let imageSrc = URL.createObjectURL(fileUpload.files[0]);
+  let newImage = document.createElement("img");
+  newImage.src = imageSrc;
+
+  newImage.setAttribute("width", 64);
+  newImage.setAttribute("height", 64);
+
   newRow.appendChild(newUsername);
   newRow.appendChild(newEmail);
   newRow.appendChild(newAddress);
   newRow.appendChild(newAdmin);
+  newRow.appendChild(newImage);
   if (!checkTable(newRow)) {
     tableBody.appendChild(newRow);
   }

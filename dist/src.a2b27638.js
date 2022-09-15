@@ -126,6 +126,7 @@ var submitData = document.getElementById("submit-data");
 var tableBody = document.getElementById("table-content");
 var emptyTable = document.getElementById("empty-table");
 var table = document.getElementById("table");
+var fileUpload = document.getElementById("input-image");
 submitData.addEventListener("click", function () {
   return changeTable();
 });
@@ -134,7 +135,7 @@ emptyTable.addEventListener("click", function () {
 });
 
 function changeTable() {
-  if (inputUsername.value.length == 0 || inputEmail.value.length == 0 || inputAddress.value.length == 0) {
+  if (inputUsername.value.length == 0 || inputEmail.value.length == 0 || inputAddress.value.length == 0 || fileUpload.files.length == 0) {
     return;
   }
 
@@ -153,10 +154,16 @@ function changeTable() {
     newAdmin.innerText = "-";
   }
 
+  var imageSrc = URL.createObjectURL(fileUpload.files[0]);
+  var newImage = document.createElement("img");
+  newImage.src = imageSrc;
+  newImage.setAttribute("width", 64);
+  newImage.setAttribute("height", 64);
   newRow.appendChild(newUsername);
   newRow.appendChild(newEmail);
   newRow.appendChild(newAddress);
   newRow.appendChild(newAdmin);
+  newRow.appendChild(newImage);
 
   if (!checkTable(newRow)) {
     tableBody.appendChild(newRow);
@@ -205,7 +212,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39775" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42031" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
