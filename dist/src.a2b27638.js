@@ -158,21 +158,24 @@ function changeTable() {
   newRow.appendChild(newAddress);
   newRow.appendChild(newAdmin);
 
-  if (checkTable) {}
-
-  tableBody.appendChild(newRow);
+  if (!checkTable(newRow)) {
+    tableBody.appendChild(newRow);
+  }
 }
 
 function cleanTable() {
   tableBody.innerHTML = "";
 }
 
-function checkTable() {
-  for (var i = 0; i < table.tBodies[0].rows.length - 1; i++) {
+function checkTable(newRow) {
+  for (var i = 0; i < table.tBodies[0].rows.length; i++) {
     if (tableBody.getElementsByTagName("tr")[i].firstChild.innerText == inputUsername.value) {
+      tableBody.getElementsByTagName("tr")[i].innerHTML = newRow.innerHTML;
       return true;
     }
   }
+
+  return false;
 }
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
