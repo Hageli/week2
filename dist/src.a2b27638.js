@@ -118,7 +118,46 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"src/index.js":[function(require,module,exports) {
+var inputUsername = document.getElementById("input-username");
+var inputEmail = document.getElementById("input-email");
+var inputAddress = document.getElementById("input-address");
+var inputAdmin = document.getElementById("input-admin");
+var submitData = document.getElementById("submit-data");
+var tableBody = document.getElementById("table-content");
+var emptyTable = document.getElementById("empty-table");
+submitData.addEventListener("click", function () {
+  return changeTable();
+});
+emptyTable.addEventListener("click", function () {
+  return cleanTable();
+});
 
+function changeTable() {
+  var newRow = document.createElement("tr");
+  var newUsername = document.createElement("td");
+  newUsername.innerText = inputUsername.value;
+  var newEmail = document.createElement("td");
+  newEmail.innerText = inputEmail.value;
+  var newAddress = document.createElement("td");
+  newAddress.innerText = inputAddress.value;
+  var newAdmin = document.createElement("td");
+
+  if (inputAdmin.checked) {
+    newAdmin.innerText = "X";
+  } else {
+    newAdmin.innerText = "-";
+  }
+
+  newRow.appendChild(newUsername);
+  newRow.appendChild(newEmail);
+  newRow.appendChild(newAddress);
+  newRow.appendChild(newAdmin);
+  tableBody.appendChild(newRow);
+}
+
+function cleanTable() {
+  tableBody.innerHTML = "";
+}
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
